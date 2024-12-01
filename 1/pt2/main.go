@@ -10,21 +10,17 @@ import (
 //go:embed data.txt
 var data string
 
-// Pair struct to hold a pair of numbers
 type Pair struct {
 	A int
 	B int
 }
 
-// Generator struct that holds the data and the current index
 type Generator struct {
 	data  []Pair
 	index int
 }
 
-// NewGenerator creates a new generator from embedded data
 func NewGenerator() *Generator {
-	// Parse the embedded data into pairs
 	var pairs []Pair
 	lines := strings.Split(data, "\n")
 	for _, line := range lines {
@@ -53,13 +49,11 @@ func NewGenerator() *Generator {
 	}
 }
 
-// Next returns the next pair of numbers or nil if we reach the end
 func (g *Generator) Next() (*Pair, bool) {
 	if g.index >= len(g.data) {
 		return nil, false // No more pairs to return
 	}
 
-	// Get the next pair and increment the index
 	pair := g.data[g.index]
 	g.index++
 	return &pair, true
@@ -90,22 +84,25 @@ func solve(listA, listB []int) int {
 	prevResult := 0.0
 	prevValue := 0
 	for _, a := range listA {
+		//use reused calc if the value is the same as this is a sorted list
 		if a == prevValue {
 			counter += prevResult
 			continue
 		}
-
+		// ignore values that don't matter, ihey are less than a skip them
 		for listB[bCounter] < a {
 			bCounter++
 		}
-
+		//count how many appearances are of the a value
 		prevCounter := bCounter
 		for a == listB[bCounter] {
 			bCounter++
 		}
+		//result
 		appearances := bCounter - prevCounter
 		prevResult = float64(a * appearances)
 		prevValue = a
+
 		counter += prevResult
 
 	}
