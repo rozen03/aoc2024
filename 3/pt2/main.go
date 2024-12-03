@@ -15,7 +15,6 @@ func main() {
 	dos := strings.Split(data, "do()")
 	for _, do := range dos {
 		donts := strings.Split(do, "don't()")
-		fmt.Println("do()", donts[0])
 		habilitaDO := donts[0]
 		muls := strings.Split(habilitaDO, "mul(")
 		for _, mul := range muls {
@@ -25,7 +24,6 @@ func main() {
 				continue
 			}
 
-			fmt.Println("mul(", mul, a*b)
 			sum += a * b
 		}
 

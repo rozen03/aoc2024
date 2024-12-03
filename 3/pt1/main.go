@@ -19,7 +19,6 @@ func main() {
 			continue
 		}
 
-		fmt.Println("mul(", mul, a*b)
 		sum += a * b
 	}
 	fmt.Println("sum", sum)
